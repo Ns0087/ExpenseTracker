@@ -6,34 +6,51 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Expense_Tracker.Models;
+using Expense_Tracker.Models.RequestViewModels;
+using Expense_Tracker.DAL;
+using Expense_Tracker.DAL.Repositories.Interfaces;
+using Expense_Tracker.Services.Interfaces;
+using Expense_Tracker.Extensions;
+using Expense_Tracker.Models.ResponseViewModels;
 
 namespace Expense_Tracker.Controllers
 {
     public class CategoryController : Controller
     {
-        private readonly ApplicationDbContext _context;
+        private readonly ICategoryService categoryService;
 
-        public CategoryController(ApplicationDbContext context)
+        public CategoryController(IServiceProvider serviceProvider)
         {
-            _context = context;
+            categoryService = serviceProvider.GetRequiredService<ICategoryService>();
         }
 
         // GET: Category
         public async Task<IActionResult> Index()
         {
-            return _context.Categories != null ?
-                        View(await _context.Categories.ToListAsync()) :
+            var categories = await categoryService.GetAllCategoriesAsync();
+            return categories != null ?
+                        View(categories) :
                         Problem("Entity set 'ApplicationDbContext.Categories'  is null.");
         }
 
 
         // GET: Category/AddOrEdit
-        public IActionResult AddOrEdit(int id = 0)
+        public async Task<IActionResult> AddOrEdit(int id = 0)
         {
             if (id == 0)
-                return View(new Category());
+                return View(new CategoryModel());
             else
-                return View(_context.Categories.Find(id));
+            {
+                try
+                {
+                    var category = await categoryService.GetCategoryByIdAsync(id);
+                    return View(category.ToEntity<CategoryResponseModel, CategoryModel>());
+                }
+                catch (Exception ex)
+                {
+                    return Problem(ex.Message);
+                }
+            }
 
         }
 
@@ -42,16 +59,22 @@ namespace Expense_Tracker.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> AddOrEdit([Bind("CategoryId,Title,Icon,Type")] Category category)
+        public async Task<IActionResult> AddOrEdit([Bind("CategoryId,Title,Icon,Type")] CategoryModel category)
         {
             if (ModelState.IsValid)
             {
-                if (category.CategoryId == 0)
-                    _context.Add(category);
-                else
-                    _context.Update(category);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                try
+                {
+                    if (category.CategoryId == 0)
+                        await categoryService.AddCategoryAsync(category);
+                    else
+                        await categoryService.UpdateCategoryAsync(category);
+                    return RedirectToAction(nameof(Index));
+                }
+                catch (Exception ex)
+                {
+                    return Problem(ex.Message);
+                }
             }
             return View(category);
         }
@@ -62,18 +85,15 @@ namespace Expense_Tracker.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.Categories == null)
+            try
             {
-                return Problem("Entity set 'ApplicationDbContext.Categories'  is null.");
+                await categoryService.DeleteCategoryAsync(id);
+                return RedirectToAction(nameof(Index));
             }
-            var category = await _context.Categories.FindAsync(id);
-            if (category != null)
+            catch (Exception ex)
             {
-                _context.Categories.Remove(category);
+                return Problem(ex.Message);
             }
-
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
         }
 
     }
