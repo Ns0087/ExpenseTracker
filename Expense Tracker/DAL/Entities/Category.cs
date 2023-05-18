@@ -1,7 +1,8 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
 
-namespace Expense_Tracker.Models
+namespace Expense_Tracker.DAL.Entities
 {
     public class Category
     {
@@ -21,9 +22,10 @@ namespace Expense_Tracker.Models
         [NotMapped]
         public string? TitleWithIcon
         {
+            set { }
             get
             {
-                return this.Icon + " " + this.Title;
+                return Icon + " " + Title;
             }
         }
     }

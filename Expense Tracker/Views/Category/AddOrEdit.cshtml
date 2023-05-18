@@ -1,4 +1,4 @@
-﻿@model Expense_Tracker.Models.Category
+﻿@model Expense_Tracker.Models.RequestViewModels.CategoryModel
 
 @{
     ViewData["PageTitle"] = Model.CategoryId == 0 ? "Create a new category" : "Edit category";
@@ -20,11 +20,11 @@
                     </div>
                 </div>
                 <div class="mb-3">
-                    <ejs-textbox id="title" placeholder="Title" ejs-for="Title" floatLabelType="Always"></ejs-textbox>
+                    <ejs-textbox id="title" placeholder="Title" ejs-for="Title" floatLabelType="Always" required></ejs-textbox>
                     <span asp-validation-for="Title" class="text-danger fs-6"></span>
                 </div>
                 <div class="mb-3">
-                    <ejs-textbox id="icon" placeholder="Icon" ejs-for="Icon" floatLabelType="Always"></ejs-textbox>
+                    <ejs-textbox id="icon" placeholder="Icon" ejs-for="Icon" floatLabelType="Always" required></ejs-textbox>
                 </div>
                 <ejs-button id="submit" type="submit" content="Submit" cssClass="e-success"></ejs-button>
             </form>

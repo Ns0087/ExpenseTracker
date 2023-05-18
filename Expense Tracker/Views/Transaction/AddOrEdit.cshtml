@@ -1,4 +1,4 @@
-﻿@model Expense_Tracker.Models.Transaction
+﻿@model Expense_Tracker.Models.RequestViewModels.TransactionModel
 
 @{
     ViewData["PageTitle"] = Model.TransactionId == 0 ? "Create a new transaction" : "Edit transaction";
@@ -19,20 +19,20 @@
                     <ejs-dropdownlist id="ddlCategory" ejs-for="CategoryId"
                                       dataSource="@ViewBag.Categories" placeholder="Category"
                                       floatLabelType="Always" allowFiltering="true" ignoreAccent="true"
-                                      filterType="Contains" popupHeight="220px">
-                        <e-dropdownlist-fields value="CategoryId" text="TitleWithIcon"></e-dropdownlist-fields>
+                                      filterType="Contains" popupHeight="220px" required>
+                        <e-dropdownlist-fields value="CategoryId" text="TitleWithIcon" required></e-dropdownlist-fields>
                     </ejs-dropdownlist>
                     <span asp-validation-for="CategoryId" class="text-danger fs-6"></span>
                 </div>
                 <div class="mb-3">
                     <ejs-numerictextbox id="amount" ejs-for="Amount"
                                         placeholder="Amount" floatLabelType="Always"
-                                        min=0 format="c0"></ejs-numerictextbox>
+                                        min=0 format="c0" required></ejs-numerictextbox>
                     <span asp-validation-for="Amount" class="text-danger fs-6"></span>
                 </div>
                 <div class="mb-3">
                     <ejs-textbox id="note" placeholder="Note" ejs-for="Note"
-                                 floatLabelType="Always" multiline="true"></ejs-textbox>
+                                 floatLabelType="Always" multiline="true" required></ejs-textbox>
                 </div>
                 <ejs-button id="submit" type="submit" content="Submit" cssClass="e-success"></ejs-button>
             </form>
