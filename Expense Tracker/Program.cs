@@ -24,7 +24,7 @@ builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddTransient<ICategoryService, CategoryService>();
 builder.Services.AddTransient<ITransactionService, TransactionService>();
 builder.Services.AddTransient<IDashboardService, DashboardService>();
-builder.Services.AddTransient<ILogInOrSignUpService, LogInOrSignUpService>();
+builder.Services.AddTransient<IUserService, UserService>();
 
 //Register Syncfusion license
 Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("Mgo+DSMBMAY9C3t2VFhhQlJBfVldX3xLflF1VWBTfFp6dFFWESFaRnZdQV1mSX1TdUFhXHxXeHFW");

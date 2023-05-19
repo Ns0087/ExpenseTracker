@@ -7,7 +7,7 @@ namespace Expense_Tracker.DAL.Entities
     public class User
     {
         [Key] 
-        public int UserId { get; set; }
+        public int UserId { get; }
 
         [Required(ErrorMessage = "Name is required.")]
         public string? FullName { get; set; }
