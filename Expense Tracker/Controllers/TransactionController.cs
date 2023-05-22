@@ -56,7 +56,9 @@ namespace Expense_Tracker.Controllers
                     if (transaction.TransactionId == 0)
                     {
                         await transactionService.AddTransactionAsync(transaction);
-                    }else
+                        return RedirectToAction(nameof(Index));
+                    }
+                    else
                     {
                         await transactionService.UpdateTransactionAsync(transaction);
                         return RedirectToAction(nameof(Index));

@@ -24,6 +24,8 @@ namespace Expense_Tracker.Controllers
 
         // GET: Users
         public IActionResult Index()
+        
+        
         {
               return View();
         }
@@ -47,7 +49,7 @@ namespace Expense_Tracker.Controllers
         //}
 
         // GET: Users/AddOrEdit
-        public IActionResult AddOrEdit(int id = 0)
+        public IActionResult SignUpOrEdit(int id = 0)
         {
             if (id == 0)
                 return View(new SignUpModel());
@@ -78,7 +80,11 @@ namespace Expense_Tracker.Controllers
                 try
                 {
                     if (user.UserId == 0)
+                    {
                         await userService.SignUp(user);
+                        return RedirectToAction(nameof(Index));
+                    }
+
                     //else
                     //    await userService.UpdateUserAsync(user);
                     //return RedirectToAction(nameof(Index));
@@ -102,7 +108,7 @@ namespace Expense_Tracker.Controllers
                      var user = await userService.logIn(logIn);
                     if(user != null)
                     {
-                        return RedirectToAction(nameof(Index), nameof(DashboardController), user.UserId);
+                        return RedirectToAction(nameof(Index), "Dashboard", user.UserId);
                     }
                     //else
                     //    await userService.UpdateUserAsync(user);

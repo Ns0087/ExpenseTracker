@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "KxgbLZnVaytyv7CWyWMiwejsbX48hezDMThCHk5ZbcI=",
+  "Hash": "p2fNprG4CLbr+Y4QLBtWWjp/3iPdtEqXVGthSqBrvUA=",
   "Source": "Expense Tracker",
   "BasePath": "_content/Expense Tracker",
   "Mode": "Default",
@@ -68,6 +68,40 @@
       "OriginalItemSpec": "wwwroot\\css\\site.css"
     },
     {
+      "Identity": "C:\\Users\\abhad\\source\\repos\\Ns0087\\ExpenseTracker\\Expense Tracker\\wwwroot\\css\\Style.css",
+      "SourceId": "Expense Tracker",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\abhad\\source\\repos\\Ns0087\\ExpenseTracker\\Expense Tracker\\wwwroot\\",
+      "BasePath": "_content/Expense Tracker",
+      "RelativePath": "css/Style.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\Style.css"
+    },
+    {
+      "Identity": "C:\\Users\\abhad\\source\\repos\\Ns0087\\ExpenseTracker\\Expense Tracker\\wwwroot\\css\\Style02.css",
+      "SourceId": "Expense Tracker",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\abhad\\source\\repos\\Ns0087\\ExpenseTracker\\Expense Tracker\\wwwroot\\",
+      "BasePath": "_content/Expense Tracker",
+      "RelativePath": "css/Style02.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\Style02.css"
+    },
+    {
       "Identity": "C:\\Users\\abhad\\source\\repos\\Ns0087\\ExpenseTracker\\Expense Tracker\\wwwroot\\favicon.ico",
       "SourceId": "Expense Tracker",
       "SourceType": "Discovered",
@@ -117,6 +151,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\favicon-32x32.png"
+    },
+    {
+      "Identity": "C:\\Users\\abhad\\source\\repos\\Ns0087\\ExpenseTracker\\Expense Tracker\\wwwroot\\js\\script.js",
+      "SourceId": "Expense Tracker",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\abhad\\source\\repos\\Ns0087\\ExpenseTracker\\Expense Tracker\\wwwroot\\",
+      "BasePath": "_content/Expense Tracker",
+      "RelativePath": "js/script.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\script.js"
     },
     {
       "Identity": "C:\\Users\\abhad\\source\\repos\\Ns0087\\ExpenseTracker\\Expense Tracker\\wwwroot\\js\\site.js",

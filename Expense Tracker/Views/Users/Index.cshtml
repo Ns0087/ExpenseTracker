@@ -1,65 +1,52 @@
-﻿@model IEnumerable<Expense_Tracker.DAL.Entities.User>
+﻿@{
+    Layout = null;
+}
 
 @{
     ViewData["Title"] = "Index";
 }
+<!DOCTYPE html>
+<!-- Created By MrWanderer -->
+<html lang="en" dir="ltr">
 
-<h1>Index</h1>
+<head>
+    <meta charset="utf-8">
+    <title>Expense Tracker</title>
+    <link rel="stylesheet" href="~/css/Style.css" asp-append-version="true" />
+</head>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.FullName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.UserName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Email)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Phone)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Password)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Gender)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.FullName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.UserName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Email)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Phone)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Password)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Gender)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.UserId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.UserId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.UserId">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+<body>
+    <div class="wrapper">
+        <div class="title">
+            Login
+        </div>
+        <form asp-action="LogIn">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="field">
+                <input type="text" id="Email" name="Email" required>
+                <label for="Email">Email Address</label>
+            </div>
+            <div class="field">
+                <input type="password" id="Password" name="Password" required>
+                <label for="Password">Password</label>
+            </div>
+            <div class="content">
+                <div class="checkbox">
+                    <input type="checkbox" id="remember-me">
+                    <label for="remember-me">Remember me</label>
+                </div>
+                <div class="pass-link">
+                    <a href="" onclick="alert('This feature will be added soon!!')">Forgot password?</a>
+                </div>
+            </div>
+            <div class="field">
+                <input type="submit" name="submit" id="submit" value="LogIn" >
+            </div>
+            <div class="signup-link">
+                Not a member? <a href="/Users/SignUpOrEdit">Signup now</a>
+            </div>
+        </form>
+    </div>
+</body>
+
+</html>

@@ -4,10 +4,11 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Expense_Tracker.DAL.Entities
 {
+    [Table("User")]
     public class User
     {
         [Key] 
-        public int UserId { get; }
+        public int UserId { get; set; }
 
         [Required(ErrorMessage = "Name is required.")]
         public string? FullName { get; set; }

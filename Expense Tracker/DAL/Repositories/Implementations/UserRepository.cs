@@ -30,6 +30,7 @@ namespace Expense_Tracker.DAL.Repositories.Implementations
         {
             try
             {
+                var list = await dbContext.Users.ToListAsync();
                 var user = await dbContext.Users.FirstOrDefaultAsync(u => u.Email == logIn.Email && u.Password == logIn.Password);
                 return user;
             }catch (Exception)
