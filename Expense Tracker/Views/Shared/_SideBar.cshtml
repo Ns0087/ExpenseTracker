@@ -1,49 +1,67 @@
-﻿@*
+﻿@using Syncfusion.EJ2.Navigations;
+@*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
-    List<Object> menuItems = new List<Object>();
+    List<MenuItem> menuItems = new List<MenuItem>();
+    List<MenuItem> settingItems = new List<MenuItem>();
 
-    menuItems.Add(new
+    //Settings Items
+    settingItems.Add(new MenuItem
     {
-        text = "General",
-        separator = true,
+        Text = "Logout",
+        IconCss = "fa-solid fa-sign-out"
     });
-    menuItems.Add(new
+    settingItems.Add(new MenuItem
     {
-        text = "Dashboard",
-        url = "/Dashboard",
-        iconCss = "fa-solid fa-box",
-    });
-    menuItems.Add(new
-    {
-        text = "Categories",
-        url = "/Category",
-        iconCss = "fa-solid fa-folder-closed",
-    });
-    menuItems.Add(new
-    {
-        text = "Transactions",
-        iconCss = "fa-solid fa-arrow-right-arrow-left",
-        url = "/Transaction"
+        Text = "Deactivate Account",
+        IconCss = "fa-solid fa-user-times"
     });
 
-    menuItems.Add(new
+    //Menu Items
+    menuItems.Add(new MenuItem
     {
-        text = "Extras",
-        separator = true,
+        Text = "General",
+        Separator = true,
     });
-    menuItems.Add(new
+    menuItems.Add(new MenuItem
     {
-        text = "Reports",
-        iconCss = "fa-solid fa-chart-simple",
-        url = "#"
-    }); menuItems.Add(new
-    {
-        text = "Settings",
-        iconCss = "fa-solid fa-gear",
-        url = "#"
+        Text = "Dashboard",
+        Url = "/Dashboard",
+        IconCss = "fa-solid fa-box",
     });
+    menuItems.Add(new MenuItem
+    {
+        Text = "Categories",
+        Url = "/Category",
+        IconCss = "fa-solid fa-folder-closed",
+    });
+    menuItems.Add(new MenuItem
+    {
+        Text = "Transactions",
+        IconCss = "fa-solid fa-arrow-right-arrow-left",
+        Url = "/Transaction"
+    });
+
+    menuItems.Add(new MenuItem
+    {
+        Text = "Extras",
+        Separator = true,
+    });
+    menuItems.Add(new MenuItem
+    {
+        Text = "Reports",
+        IconCss = "fa-solid fa-chart-simple",
+        Url = "#"
+    });
+    menuItems.Add(new MenuItem
+    {
+        Text = "Settings",
+        IconCss = "fa-solid fa-gear",
+        Items = settingItems
+    });
+
+    
 }
 
 
@@ -70,7 +88,8 @@
         <ejs-menu id="menu"
                   items="menuItems"
                   orientation="Vertical"
-                  hamburgerMode></ejs-menu>
+                  hamburgerMode="true"
+                  showItemOnClick="true"></ejs-menu>
     </e-content-template>
 </ejs-sidebar>
 
