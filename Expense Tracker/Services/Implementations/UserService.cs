@@ -16,6 +16,20 @@ namespace Expense_Tracker.Services.Implementations
             userRepository = serviceProvider.GetRequiredService<IUserRepository>();
         }
 
+        public async Task<bool> DeactivateAccount(int userId)
+        {
+            try
+            {
+                if (await userRepository.DeleteUserAsync(userId))
+                    return true;
+                else
+                    throw new Exception("Not a valid User!!");
+            }catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
         public async Task<UserResponseModel> logIn(LogInModel logIn)
         {
             try

@@ -7,5 +7,6 @@ namespace Expense_Tracker.Services.Interfaces
     {
         public Task<UserResponseModel> logIn(LogInModel logIn);
         public Task<bool> SignUp(SignUpModel user);
+        public Task<bool> DeactivateAccount(int userId);
     }
 }

@@ -12,13 +12,13 @@ namespace Expense_Tracker.Services.Implementations
             transactionService = serviceProvider.GetRequiredService<ITransactionService>();
         }
 
-        public async Task<DashboardResponseModel> GetDashboardDetailsAsync()
+        public async Task<DashboardResponseModel> GetDashboardDetailsAsync(int userId)
         {
             try
             {
                 var SelectedTransactions = new List<TransactionResponseModel>();
-                SelectedTransactions = await transactionService.GetSelectedTransactionsAsync();
-                var dashBoard = await MapDashboardDetailsAsync(SelectedTransactions);
+                SelectedTransactions = await transactionService.GetSelectedTransactionsAsync(userId);
+                var dashBoard = await MapDashboardDetailsAsync(SelectedTransactions, userId);
                 return dashBoard;
             }
             catch (Exception ex)
@@ -27,7 +27,7 @@ namespace Expense_Tracker.Services.Implementations
             }
         }
 
-        private async Task<DashboardResponseModel> MapDashboardDetailsAsync(List<TransactionResponseModel> selectedTransactions)
+        private async Task<DashboardResponseModel> MapDashboardDetailsAsync(List<TransactionResponseModel> selectedTransactions, int userId)
         {
             DateTime StartDate = DateTime.Today.AddDays(-6);
             DateTime EndDate = DateTime.Today;
@@ -38,7 +38,7 @@ namespace Expense_Tracker.Services.Implementations
             dashboard.Balance = dashboard.TotalIncome - dashboard.TotalExpense;
             dashboard.DoughnutChartData = GetDoughnutChartData(selectedTransactions);
             dashboard.SplineChartData = GetSplineChartData(selectedTransactions, StartDate, EndDate);
-            dashboard.RecentTransactions = (await transactionService.GetAllTransactionAsync()).OrderByDescending(j => j.Date).Take(5).ToList();
+            dashboard.RecentTransactions = (await transactionService.GetAllTransactionAsync(userId)).OrderByDescending(j => j.Date).Take(5).ToList();
             return dashboard;
         }
 

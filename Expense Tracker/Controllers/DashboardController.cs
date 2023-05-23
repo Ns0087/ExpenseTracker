@@ -10,15 +10,38 @@ namespace Expense_Tracker.Controllers
     {
 
         private readonly IDashboardService dashboardService;
+        private readonly ICryptographicService cryptographicService;
 
         public DashboardController(IServiceProvider serviceProvider)
         {
             dashboardService = serviceProvider.GetRequiredService<IDashboardService>();
+            cryptographicService = serviceProvider.GetRequiredService<ICryptographicService>();
         }
 
-        public async Task<ActionResult> Index()
+        public async Task<ActionResult> Index(string? Id)
         {
-            var dashboard = await dashboardService.GetDashboardDetailsAsync();
+            if(Id == null)
+            {
+                return BadRequest("Not a valid User!!");
+            }
+
+            int userId = -1;
+
+            try {
+                userId = cryptographicService.Decrypt(Id);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return BadRequest("Not a valid User!!");
+            }
+
+            if (userId <= 0)
+            {
+                return BadRequest("Not a valid User!!");
+            }
+            
+            var dashboard = await dashboardService.GetDashboardDetailsAsync(userId);
 
             //Total Income
             ViewBag.TotalIncome = dashboard.TotalIncome.ToString("C0");
@@ -41,6 +64,9 @@ namespace Expense_Tracker.Controllers
             ViewBag.SplineChartData = dashboard.SplineChartData;
             //Recent Transactions
             ViewBag.RecentTransactions = dashboard.RecentTransactions;
+
+            //UserId
+            ViewBag.Id = Id;
 
             return View();
         }

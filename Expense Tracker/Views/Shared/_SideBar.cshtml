@@ -8,65 +8,67 @@
 
     //Settings Items
     settingItems.Add(new MenuItem
-    {
-        Text = "Logout",
-        IconCss = "fa-solid fa-sign-out"
-    });
+            {
+                Text = "Logout",
+                IconCss = "fa-solid fa-sign-out",
+                Url = "/Users/LogOut/" + ViewBag.Id
+            });
     settingItems.Add(new MenuItem
-    {
-        Text = "Deactivate Account",
-        IconCss = "fa-solid fa-user-times"
-    });
+            {
+                Text = "Delete Account",
+                IconCss = "fa-solid fa-user-times",
+                Url = "/Users/Deactivate/" + ViewBag.Id
+            });
 
     //Menu Items
     menuItems.Add(new MenuItem
-    {
-        Text = "General",
-        Separator = true,
-    });
+            {
+                Text = "General",
+                Separator = true,
+            });
     menuItems.Add(new MenuItem
-    {
-        Text = "Dashboard",
-        Url = "/Dashboard",
-        IconCss = "fa-solid fa-box",
-    });
+            {
+                Text = "Dashboard",
+                Url = "/Dashboard/Index/" + ViewBag.Id,
+                IconCss = "fa-solid fa-box",
+            });
     menuItems.Add(new MenuItem
-    {
-        Text = "Categories",
-        Url = "/Category",
-        IconCss = "fa-solid fa-folder-closed",
-    });
+            {
+                Text = "Categories",
+                Url = "/Category/Index/" + ViewBag.Id,
+                IconCss = "fa-solid fa-folder-closed",
+            });
     menuItems.Add(new MenuItem
-    {
-        Text = "Transactions",
-        IconCss = "fa-solid fa-arrow-right-arrow-left",
-        Url = "/Transaction"
-    });
+            {
+                Text = "Transactions",
+                IconCss = "fa-solid fa-arrow-right-arrow-left",
+                Url = "/Transaction/Index/" + ViewBag.Id
+            });
 
     menuItems.Add(new MenuItem
-    {
-        Text = "Extras",
-        Separator = true,
-    });
+            {
+                Text = "Extras",
+                Separator = true,
+            });
     menuItems.Add(new MenuItem
-    {
-        Text = "Reports",
-        IconCss = "fa-solid fa-chart-simple",
-        Url = "#"
-    });
+            {
+                Text = "Reports",
+                IconCss = "fa-solid fa-chart-simple",
+                Url = "#"
+            });
     menuItems.Add(new MenuItem
-    {
-        Text = "Settings",
-        IconCss = "fa-solid fa-gear",
-        Items = settingItems
-    });
+            {
+                Text = "Settings",
+                IconCss = "fa-solid fa-gear",
+                Items = settingItems
+            });
 
-    
+
 }
 
 
 <ejs-sidebar id="sidebar" width="290px" enableDock dockSize="100px"
-            target=".dock-target" enableGestures="false">
+             target=".dock-target" enableGestures="false">
     <e-content-template>
 
         <div class="logo-wrapper">
@@ -94,7 +96,7 @@
 </ejs-sidebar>
 
 <script>
-    document.addEventListener('DOMContentLoaded',function (){
+    document.addEventListener('DOMContentLoaded', function () {
         dockBar = document.getElementById('sidebar').ej2_instances[0];
         document.getElementById('sidebar-toggler').onclick = function () {
             dockBar.toggle();

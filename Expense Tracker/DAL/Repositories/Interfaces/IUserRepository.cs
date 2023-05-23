@@ -7,5 +7,6 @@ namespace Expense_Tracker.DAL.Repositories.Interfaces
     {
         public Task<User> GetUserAsync(LogInModel logIn);
         public Task<bool> AddUserAsync(User user);
+        public Task<bool> DeleteUserAsync(int userId);
     }
 }

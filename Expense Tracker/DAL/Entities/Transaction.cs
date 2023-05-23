@@ -22,6 +22,9 @@ namespace Expense_Tracker.DAL.Entities
 
         public DateTime Date { get; set; } = DateTime.Now;
 
+        [Column(TypeName = "int")]
+        public int UserId { get; set; }
+
         [NotMapped]
         public string? CategoryTitleWithIcon
         {

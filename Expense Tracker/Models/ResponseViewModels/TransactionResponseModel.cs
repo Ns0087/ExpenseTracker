@@ -21,6 +21,9 @@ namespace Expense_Tracker.Models.ResponseViewModels
 
         public DateTime Date { get; set; } = DateTime.Now;
 
+        [Column(TypeName = "int")]
+        public int UserId { get; set; }
+
         [NotMapped]
         public string? CategoryTitleWithIcon
         {

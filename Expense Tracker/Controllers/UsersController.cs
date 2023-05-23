@@ -17,17 +17,17 @@ namespace Expense_Tracker.Controllers
     public class UsersController : Controller
     {
         private readonly IUserService userService;
+        private readonly ICryptographicService cryptographicService;
         public UsersController(IServiceProvider serviceProvider)
         {
             userService = serviceProvider.GetRequiredService<IUserService>();
+            cryptographicService = serviceProvider.GetRequiredService<ICryptographicService>();
         }
 
         // GET: Users
         public IActionResult Index()
-        
-        
         {
-              return View();
+            return View();
         }
 
         // GET: Users/Details/5
@@ -91,7 +91,7 @@ namespace Expense_Tracker.Controllers
                 }
                 catch (Exception ex)
                 {
-                    return Problem(ex.Message);
+                    return BadRequest(ex.Message);
                 }
             }
             return RedirectToAction(nameof(Index));
@@ -105,10 +105,11 @@ namespace Expense_Tracker.Controllers
             {
                 try
                 {
-                     var user = await userService.logIn(logIn);
-                    if(user != null)
+                    var user = await userService.logIn(logIn);
+                    if (user != null)
                     {
-                        return RedirectToAction(nameof(Index), "Dashboard", user.UserId);
+                        var cipherText = cryptographicService.Encrypt(Convert.ToString(user.UserId));
+                        return RedirectToAction(nameof(Index), "Dashboard", new { Id = cipherText });
                     }
                     //else
                     //    await userService.UpdateUserAsync(user);
@@ -116,7 +117,7 @@ namespace Expense_Tracker.Controllers
                 }
                 catch (Exception ex)
                 {
-                    return Problem(ex.Message);
+                    return BadRequest(ex.Message);
                 }
             }
             return RedirectToAction(nameof(Index));
@@ -173,23 +174,39 @@ namespace Expense_Tracker.Controllers
         //    return View(user);
         //}
 
-        //// GET: Users/Delete/5
-        //public async Task<IActionResult> Delete(int? id)
-        //{
-        //    if (id == null || _context.Users == null)
-        //    {
-        //        return NotFound();
-        //    }
+        // GET: Users/Delete/5
+        public async Task<IActionResult> Deactivate(string? Id)
+        {
+            try
+            {
+                int userId = -1;
+                if (Id == null)
+                {
+                    return BadRequest("Not a valid User!!");
+                }
 
-        //    var user = await _context.Users
-        //        .FirstOrDefaultAsync(m => m.UserId == id);
-        //    if (user == null)
-        //    {
-        //        return NotFound();
-        //    }
+                userId = cryptographicService.Decrypt(Id);
+                if (userId > 0)
+                {
+                    if (await userService.DeactivateAccount(userId))
+                        return RedirectToAction(nameof(Index));
+                    else
+                    {
+                        return BadRequest("Something went wrong, Please try again later!!");
+                    }
+                }
+                else
+                {
+                    return BadRequest("Not a valid User!!");
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return BadRequest("Not a valid User!!");
+            }
 
-        //    return View(user);
-        //}
+        }
 
         //// POST: Users/Delete/5
         //[HttpPost, ActionName("Delete")]
@@ -214,5 +231,21 @@ namespace Expense_Tracker.Controllers
         //{
         //  return (_context.Users?.Any(e => e.UserId == id)).GetValueOrDefault();
         //}
+
+        public IActionResult LogOut(string Id)
+        {
+            try
+            {
+                var userId = cryptographicService.Decrypt(Id);
+                ViewBag.Id = null;
+                userId = -1;
+                return RedirectToAction(nameof(Index));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+
+        }
     }
 }

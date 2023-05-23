@@ -38,11 +38,12 @@ namespace Expense_Tracker.DAL.Repositories.Implementations
             }
         }
 
-        public async Task<List<Transaction>> GetAllTransactionsAsync()
+        public async Task<List<Transaction>> GetAllTransactionsAsync(int userId)
         {
             try
             {
-                return await dbContext.Transactions.Include(t => t.Category).ToListAsync();
+                var list = await dbContext.Transactions.Include(t => t.Category).ToListAsync();
+                return list.Where(li => li.UserId == userId).ToList();
             }
             catch (Exception)
             {
@@ -50,7 +51,7 @@ namespace Expense_Tracker.DAL.Repositories.Implementations
             }
         }
 
-        public async Task<List<Transaction>> GetAllTransactionsForDashboardAsync()
+        public async Task<List<Transaction>> GetAllTransactionsForDashboardAsync(int userId)
         {
             try
             {
@@ -58,7 +59,7 @@ namespace Expense_Tracker.DAL.Repositories.Implementations
                 DateTime EndDate = DateTime.Today;
                 List<Transaction> SelectedTransactions = await dbContext.Transactions
                .Include(x => x.Category)
-               .Where(y => y.Date >= StartDate && y.Date <= EndDate)
+               .Where(y => y.Date >= StartDate && y.Date <= EndDate && y.UserId == userId)
                .ToListAsync();
 
                 return SelectedTransactions;
@@ -90,7 +91,6 @@ namespace Expense_Tracker.DAL.Repositories.Implementations
             {
                 throw;
             }
-            throw new NotImplementedException();
         }
     }
 }
