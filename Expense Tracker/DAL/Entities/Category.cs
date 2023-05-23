@@ -19,6 +19,9 @@ namespace Expense_Tracker.DAL.Entities
         [Column(TypeName = "nvarchar(10)")]
         public string Type { get; set; } = "Expense";
 
+        [Column(TypeName = "int")]
+        public int UserId { get; set; }
+
         [NotMapped]
         public string? TitleWithIcon
         {

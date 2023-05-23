@@ -6,6 +6,8 @@ namespace Expense_Tracker.Models.RequestViewModels
 {
     public class SignUpModel
     {
+        public int UserId { get; set; } = 0;
+
         [Required(ErrorMessage = "Name is required.")]
         public string FullName { get; set; }
 

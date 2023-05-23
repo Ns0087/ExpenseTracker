@@ -36,11 +36,12 @@ namespace Expense_Tracker.DAL.Repositories.Implementations
             }
         }
 
-        public async Task<List<Category>> GetAllCategoriesAsync()
+        public async Task<List<Category>> GetAllCategoriesAsync(int userId)
         {
             try
             {
-                return await dbContext.Categories.ToListAsync();
+                var list = await dbContext.Categories.ToListAsync();
+                return list.Where(li => li.UserId == userId || li.UserId == 0).ToList();
             }
             catch (Exception)
             {

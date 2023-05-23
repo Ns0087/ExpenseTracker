@@ -4,7 +4,7 @@ namespace Expense_Tracker.Services.Interfaces
 {
     public interface IDashboardService
     {
-        public Task<DashboardResponseModel> GetDashboardDetailsAsync();
+        public Task<DashboardResponseModel> GetDashboardDetailsAsync(int userId);
 
     }
 }

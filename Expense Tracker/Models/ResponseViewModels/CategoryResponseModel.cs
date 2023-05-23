@@ -14,6 +14,9 @@ namespace Expense_Tracker.Models.ResponseViewModels
 
         public string Type { get; set; } = "Expense";
 
+        [Column(TypeName = "int")]
+        public int UserId { get; set; }
+
         public string? TitleWithIcon
         {
             set { }

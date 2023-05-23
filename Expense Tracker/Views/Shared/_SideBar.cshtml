@@ -1,54 +1,74 @@
-﻿@*
+﻿@using Syncfusion.EJ2.Navigations;
+@*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
-    List<Object> menuItems = new List<Object>();
+    List<MenuItem> menuItems = new List<MenuItem>();
+    List<MenuItem> settingItems = new List<MenuItem>();
 
-    menuItems.Add(new
-    {
-        text = "General",
-        separator = true,
-    });
-    menuItems.Add(new
-    {
-        text = "Dashboard",
-        url = "/",
-        iconCss = "fa-solid fa-box",
-    });
-    menuItems.Add(new
-    {
-        text = "Categories",
-        url = "/Category",
-        iconCss = "fa-solid fa-folder-closed",
-    });
-    menuItems.Add(new
-    {
-        text = "Transactions",
-        iconCss = "fa-solid fa-arrow-right-arrow-left",
-        url = "/Transaction"
-    });
+    //Settings Items
+    settingItems.Add(new MenuItem
+            {
+                Text = "Logout",
+                IconCss = "fa-solid fa-sign-out",
+                Url = "/Users/LogOut/" + ViewBag.Id
+            });
+    settingItems.Add(new MenuItem
+            {
+                Text = "Delete Account",
+                IconCss = "fa-solid fa-user-times",
+                Url = "/Users/Deactivate/" + ViewBag.Id
+            });
 
-    menuItems.Add(new
-    {
-        text = "Extras",
-        separator = true,
-    });
-    menuItems.Add(new
-    {
-        text = "Reports",
-        iconCss = "fa-solid fa-chart-simple",
-        url = "#"
-    }); menuItems.Add(new
-    {
-        text = "Settings",
-        iconCss = "fa-solid fa-gear",
-        url = "#"
-    });
+    //Menu Items
+    menuItems.Add(new MenuItem
+            {
+                Text = "General",
+                Separator = true,
+            });
+    menuItems.Add(new MenuItem
+            {
+                Text = "Dashboard",
+                Url = "/Dashboard/Index/" + ViewBag.Id,
+                IconCss = "fa-solid fa-box",
+            });
+    menuItems.Add(new MenuItem
+            {
+                Text = "Categories",
+                Url = "/Category/Index/" + ViewBag.Id,
+                IconCss = "fa-solid fa-folder-closed",
+            });
+    menuItems.Add(new MenuItem
+            {
+                Text = "Transactions",
+                IconCss = "fa-solid fa-arrow-right-arrow-left",
+                Url = "/Transaction/Index/" + ViewBag.Id
+            });
+
+    menuItems.Add(new MenuItem
+            {
+                Text = "Extras",
+                Separator = true,
+            });
+    menuItems.Add(new MenuItem
+            {
+                Text = "Reports",
+                IconCss = "fa-solid fa-chart-simple",
+                Url = "#"
+            });
+    menuItems.Add(new MenuItem
+            {
+                Text = "Settings",
+                IconCss = "fa-solid fa-gear",
+                Items = settingItems
+            });
+
+
 }
 
 
 <ejs-sidebar id="sidebar" width="290px" enableDock dockSize="100px"
-            target=".dock-target" enableGestures="false">
+             target=".dock-target" enableGestures="false">
     <e-content-template>
 
         <div class="logo-wrapper">
@@ -70,12 +90,13 @@
         <ejs-menu id="menu"
                   items="menuItems"
                   orientation="Vertical"
-                  hamburgerMode></ejs-menu>
+                  hamburgerMode="true"
+                  showItemOnClick="true"></ejs-menu>
     </e-content-template>
 </ejs-sidebar>
 
 <script>
-    document.addEventListener('DOMContentLoaded',function (){
+    document.addEventListener('DOMContentLoaded', function () {
         dockBar = document.getElementById('sidebar').ej2_instances[0];
         document.getElementById('sidebar-toggler').onclick = function () {
             dockBar.toggle();

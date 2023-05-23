@@ -5,6 +5,14 @@
       "PackagePath": "staticwebassets\\Expense Tracker.bundle.scp.css"
     },
     {
+      "Id": "C:\\Users\\abhad\\source\\repos\\Ns0087\\ExpenseTracker\\Expense Tracker\\wwwroot\\css\\Style.css",
+      "PackagePath": "staticwebassets\\css\\Style.css"
+    },
+    {
+      "Id": "C:\\Users\\abhad\\source\\repos\\Ns0087\\ExpenseTracker\\Expense Tracker\\wwwroot\\css\\Style02.css",
+      "PackagePath": "staticwebassets\\css\\Style02.css"
+    },
+    {
       "Id": "C:\\Users\\abhad\\source\\repos\\Ns0087\\ExpenseTracker\\Expense Tracker\\wwwroot\\css\\site.css",
       "PackagePath": "staticwebassets\\css\\site.css"
     },
@@ -19,6 +27,10 @@
     {
       "Id": "C:\\Users\\abhad\\source\\repos\\Ns0087\\ExpenseTracker\\Expense Tracker\\wwwroot\\favicon.ico",
       "PackagePath": "staticwebassets\\favicon.ico"
+    },
+    {
+      "Id": "C:\\Users\\abhad\\source\\repos\\Ns0087\\ExpenseTracker\\Expense Tracker\\wwwroot\\js\\script.js",
+      "PackagePath": "staticwebassets\\js\\script.js"
     },
     {
       "Id": "C:\\Users\\abhad\\source\\repos\\Ns0087\\ExpenseTracker\\Expense Tracker\\wwwroot\\js\\site.js",

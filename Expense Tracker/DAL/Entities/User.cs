@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Expense_Tracker.DAL.Entities
 {
+    [Table("User")]
     public class User
     {
         [Key] 
@@ -29,5 +30,6 @@ namespace Expense_Tracker.DAL.Entities
         public string? Password { get; set; }
 
         public string? Gender { get; set; } = string.Empty;
+        public bool? IsDeleted { get; set; } = false;
     }
 }

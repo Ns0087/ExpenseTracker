@@ -18,6 +18,9 @@ namespace Expense_Tracker.Models.RequestViewModels
         [Column(TypeName = "nvarchar(10)")]
         public string Type { get; set; } = "Expense";
 
+        [Column(TypeName = "int")]
+        public int UserId { get; set; }
+
         public string? TitleWithIcon
         {
             set { }

@@ -17,10 +17,10 @@ namespace Expense_Tracker.Services.Implementations
             categoryRepository = serviceProvider.GetRequiredService<ICategoryRepository>();
         }
 
-        public async Task<List<CategoryResponseModel>> GetAllCategoriesAsync()
+        public async Task<List<CategoryResponseModel>> GetAllCategoriesAsync(int userId)
         {
             List<CategoryResponseModel> list = new List<CategoryResponseModel>();
-            var categories = await categoryRepository.GetAllCategoriesAsync();
+            var categories = await categoryRepository.GetAllCategoriesAsync(userId);
             foreach (var category in categories)
             {
                 list.Add(category.ToEntity<Category, CategoryResponseModel>());

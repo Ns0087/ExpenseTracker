@@ -3,7 +3,7 @@
 @{
     ViewData["PageTitle"] = "Transactions";
     ViewData["PageActionText"] = "+ New Transaction";
-    ViewData["PageActionUrl"] = "/Transaction/AddOrEdit";
+    ViewData["PageActionUrl"] = "/Transaction/AddOrEdit?Id=" + ViewBag.Id + "&transactionId=";
 }
 
 <div class="row">
@@ -29,10 +29,10 @@
 
 <script id="actionColumnTemplate" type="text/x-template">
     <div class="d-flex flex-row justify-content-start">
-        <a class="btn btn-sm no-a-decoration" href="/Transaction/AddOrEdit/${TransactionId}">
+        <a class="btn btn-sm no-a-decoration" href="/Transaction/AddOrEdit?Id=@ViewBag.Id&transactionId=${TransactionId}">
             <i class="fa-solid fa-pen fa-lg"></i>
         </a>
-        <form action="/Transaction/Delete/${TransactionId}" method="post">
+        <form action="/Transaction/Delete?Id=@ViewBag.Id&transactionId=${TransactionId}" method="post">
             @Html.AntiForgeryToken()
             <button type="submit" class="btn btn-sm btn-link no-a-decoration"
             onclick="return confirm(&quot;Are sure to delete this record?&quot;)">

@@ -49,10 +49,10 @@ namespace Expense_Tracker.Services.Implementations
             }
         }
 
-        public async Task<List<TransactionResponseModel>> GetAllTransactionAsync()
+        public async Task<List<TransactionResponseModel>> GetAllTransactionAsync(int userId)
         {
             List<TransactionResponseModel> list = new List<TransactionResponseModel>();
-            var transactions = await transactionRepository.GetAllTransactionsAsync();
+            var transactions = await transactionRepository.GetAllTransactionsAsync(userId);
 
             foreach (var transaction in transactions)
             {
@@ -62,10 +62,10 @@ namespace Expense_Tracker.Services.Implementations
             return list;
         }
 
-        public async Task<List<TransactionResponseModel>> GetSelectedTransactionsAsync()
+        public async Task<List<TransactionResponseModel>> GetSelectedTransactionsAsync(int userId)
         {
             List<TransactionResponseModel> list = new List<TransactionResponseModel>();
-            var transactions = await transactionRepository.GetAllTransactionsForDashboardAsync();
+            var transactions = await transactionRepository.GetAllTransactionsForDashboardAsync(userId);
 
             foreach (var transaction in transactions)
             {
